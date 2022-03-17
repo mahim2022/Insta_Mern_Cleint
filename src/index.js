@@ -8,17 +8,20 @@ import { PostStatesProvider } from "./Components/states/postStates.jsx";
 import { CurrentIdStateProvider } from "./Components/states/CurrentId";
 import { BrowserRouter } from "react-router-dom";
 import { CurrentUserStateProvider } from "./Components/states/CurrentUser";
+import { PostUpdateCounterProvider } from "./Components/states/PostUpdateCounter";
 
 ReactDOM.render(
 	<BrowserRouter>
 		<CurrentUserStateProvider>
-			<PostStatesProvider>
-				<CurrentIdStateProvider>
-					<React.StrictMode>
-						<App />
-					</React.StrictMode>
-				</CurrentIdStateProvider>
-			</PostStatesProvider>
+			<PostUpdateCounterProvider>
+				<PostStatesProvider>
+					<CurrentIdStateProvider>
+						<React.StrictMode>
+							<App />
+						</React.StrictMode>
+					</CurrentIdStateProvider>
+				</PostStatesProvider>
+			</PostUpdateCounterProvider>
 		</CurrentUserStateProvider>
 	</BrowserRouter>,
 	document.getElementById("root")

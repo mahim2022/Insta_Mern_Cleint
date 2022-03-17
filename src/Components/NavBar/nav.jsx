@@ -11,16 +11,12 @@ export const NavBar = () => {
 
 	useEffect(() => {
 		navigate("/");
-		// setUser(JSON.parse(localStorage.getItem("profile")));
-		console.log(currentUser);
 	}, [currentUser]);
 
 	const handleSignOut = (e) => {
 		e.preventDefault();
-		// setUser(null);
 		setCurrentUser(null);
 		localStorage.clear();
-		// console.log(user);
 	};
 
 	return (

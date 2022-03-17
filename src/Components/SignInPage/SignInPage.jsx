@@ -13,25 +13,26 @@ export const LoginPage = () => {
 	const handleSignIn = async (e) => {
 		e.preventDefault();
 		const result = await signIn(data);
-		console.log(result);
+		localStorage.setItem("profile", JSON.stringify(result.data));
+		setCurrentUser(result.data);
 		setData({ email: "", password: "" });
 	};
 
 	const handleSignUp = async (e) => {
 		e.preventDefault();
 		const result = await signUp(data);
-		console.log(result);
+		localStorage.setItem("profile", JSON.stringify(result.data));
+		setCurrentUser(result.data);
 		setData({ email: "", password: "" });
 	};
 
 	//////////Google Button Funtions//////
 	const googleSuccess = (res) => {
-		// console.log(res);
-		const profileObj = res?.profileObj;
+		const result = res?.profileObj;
 		const token = res?.tokenId;
-		const result = { ...profileObj, token };
-		localStorage.setItem("profile", JSON.stringify(result));
-		setCurrentUser(result);
+		const finalResult = { result, token };
+		localStorage.setItem("profile", JSON.stringify(finalResult));
+		setCurrentUser(finalResult);
 	};
 
 	const googleFailure = () => {

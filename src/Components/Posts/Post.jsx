@@ -3,10 +3,12 @@ import { PostState } from "../states/postStates";
 import { Card, Container, Row, Col, Button } from "react-bootstrap";
 import { CurrentIdState } from "../states/CurrentId";
 import { DeletePost, LikePost } from "../../api";
+import { PostUpdateCounter } from "../states/PostUpdateCounter";
 
 export const Post = () => {
 	const [post] = useContext(PostState);
 	const [CurrentId, setCurrentId] = useContext(CurrentIdState);
+	const [counter, setCounter] = useContext(PostUpdateCounter);
 
 	////Get Post data onclick Button///
 	const updatePosts = (id) => {
@@ -14,13 +16,15 @@ export const Post = () => {
 		// console.log(CurrentId);
 	};
 	//deletepost
-	const deletePost = (id) => {
+	const deletePost = async (id) => {
 		console.log(`Button Pressed ${id}`);
-		DeletePost(id);
+		await DeletePost(id);
+		setCounter(!counter);
 	};
 	///like post
-	const likePost = (id) => {
-		LikePost(id);
+	const likePost = async (id) => {
+		await LikePost(id);
+		setCounter(!counter);
 	};
 
 	return (

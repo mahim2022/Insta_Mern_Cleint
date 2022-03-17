@@ -7,46 +7,52 @@ import { useContext } from "react";
 import { PostState } from "../../states/postStates";
 import { CurrentIdState } from "../../states/CurrentId";
 import axios from "axios";
+import { CurrentUserState } from "../../states/CurrentUser";
+import { PostUpdateCounter } from "../../states/PostUpdateCounter";
 
 export const InputForm = () => {
 	const [post] = useContext(PostState);
 	const [CurrentId, setCurrentId] = useContext(CurrentIdState);
+	const [currentUser] = useContext(CurrentUserState);
+	const currentUserEmail = currentUser?.result?.email;
+	const [counter, setCounter] = useContext(PostUpdateCounter);
 
 	///////Getting Currentpost for update/////
 	const currentPost = CurrentId ? post.find((p) => p._id === CurrentId) : null;
 
 	const [postData, setPostData] = useState({
-		creator: "",
 		title: "",
 		message: "",
 		tags: "",
 		selectedFile: "",
 	});
-	const newPostDoc = post.map((cur) =>
-		cur._id === CurrentId ? postData : cur
-	);
+	// const newPostDoc = post.map((cur) =>
+	// 	cur._id === CurrentId ? postData : cur
+	// );
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-
 		if (CurrentId) {
 			try {
-				// console.log(newPostDoc, CurrentId);
-				UpdatePost(CurrentId, postData);
+				const result = await UpdatePost(CurrentId, {
+					...postData,
+					email: currentUserEmail,
+				});
+				setCounter(!counter);
 			} catch (error) {
 				console.log(error);
 			}
 		} else {
-			createPost(postData);
+			const result = await createPost({ ...postData, email: currentUserEmail });
+			setCounter(!counter);
 		}
-		// clear();
+		clear();
 	};
 
 	const clear = (e) => {
 		// e.preventDefault();
 		setCurrentId(null);
 		setPostData({
-			creator: "",
 			title: "",
 			message: "",
 			tags: "",
@@ -65,7 +71,8 @@ export const InputForm = () => {
 			{CurrentId ? <h3>Editing A memory</h3> : <h3>Creating A memory</h3>}
 
 			<Form>
-				<Form.Group className="mb-3" controlId="formBasicEmail">
+				{/* Creator set Dynamically */}
+				{/* <Form.Group className="mb-3" controlId="formBasicEmail">
 					<Form.Control
 						type="string"
 						placeholder="Creator"
@@ -74,7 +81,8 @@ export const InputForm = () => {
 							setPostData({ ...postData, creator: e.target.value })
 						}
 					/>
-				</Form.Group>
+				</Form.Group> */}
+
 				<Form.Group className="mb-3" controlId="formBasicPassword">
 					<Form.Control
 						type="string"
