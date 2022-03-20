@@ -1,0 +1,38 @@
+.like_display_button {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	padding: 0px 3px 0px 3px;
+}
+
+.like {
+	background-color: transparent;
+	border: none;
+}
+
+.delete {
+	cursor: pointer;
+	font-weight: bolder;
+	color: gray;
+}
+
+.edit {
+	/* display: flex;
+	flex-direction: row;
+	justify-content: flex-end; */
+	height: 0px;
+	position: relative;
+	left: 140px;
+	top: 10px;
+	margin-top: -10px;
+}
+
+.LikeRender {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+.likeIcon {
+	position: relative;
+	top: 4px;
+}

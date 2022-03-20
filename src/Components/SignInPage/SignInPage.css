@@ -1,0 +1,91 @@
+.cardSignIn {
+	position: relative;
+	left: 35vw;
+}
+
+.switchSignIn {
+	border: solid;
+	border-width: 1px;
+}
+
+/* CSS */
+.button-2 {
+	background-color: rgba(51, 51, 51, 0.05);
+	border-radius: 8px;
+	border-width: 0;
+	color: #333333;
+	cursor: pointer;
+	display: inline-block;
+	font-family: "Haas Grot Text R Web", "Helvetica Neue", Helvetica, Arial,
+		sans-serif;
+	font-size: 14px;
+	font-weight: 500;
+	line-height: 20px;
+	list-style: none;
+	margin: 0;
+	padding: 10px 12px;
+	text-align: center;
+	transition: all 200ms;
+	vertical-align: baseline;
+	white-space: nowrap;
+	user-select: none;
+	-webkit-user-select: none;
+	touch-action: manipulation;
+	margin-top: 10px;
+	margin-left: 40px;
+}
+
+/* CSS */
+.button-53 {
+	background-color: #3dd1e7;
+	border: 0 solid #e5e7eb;
+	box-sizing: border-box;
+	color: #000000;
+	display: flex;
+	font-family: ui-sans-serif, system-ui, -apple-system, system-ui, "Segoe UI",
+		Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif,
+		"Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+	font-size: 1rem;
+	font-weight: 700;
+	justify-content: center;
+	line-height: 1.75rem;
+	padding: 0.75rem 1.65rem;
+	position: relative;
+	text-align: center;
+	text-decoration: none #000000 solid;
+	text-decoration-thickness: auto;
+	width: 100%;
+	max-width: 460px;
+	position: relative;
+	cursor: pointer;
+	transform: rotate(-2deg);
+	user-select: none;
+	-webkit-user-select: none;
+	touch-action: manipulation;
+}
+
+.button-53:focus {
+	outline: 0;
+}
+
+.button-53:after {
+	content: "";
+	position: absolute;
+	border: 1px solid #000000;
+	bottom: 4px;
+	left: 4px;
+	width: calc(100% - 1px);
+	height: calc(100% - 1px);
+}
+
+.button-53:hover:after {
+	bottom: 2px;
+	left: 2px;
+}
+
+@media (min-width: 768px) {
+	.button-53 {
+		padding: 0.75rem 3rem;
+		font-size: 1.25rem;
+	}
+}

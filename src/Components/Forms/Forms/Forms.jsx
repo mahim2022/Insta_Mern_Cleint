@@ -6,9 +6,9 @@ import FileBase64 from "react-file-base64";
 import { useContext } from "react";
 import { PostState } from "../../states/postStates";
 import { CurrentIdState } from "../../states/CurrentId";
-import axios from "axios";
 import { CurrentUserState } from "../../states/CurrentUser";
 import { PostUpdateCounter } from "../../states/PostUpdateCounter";
+import { useNavigate } from "react-router-dom";
 
 export const InputForm = () => {
 	const [post] = useContext(PostState);
@@ -34,7 +34,7 @@ export const InputForm = () => {
 		e.preventDefault();
 		if (CurrentId) {
 			try {
-				const result = await UpdatePost(CurrentId, {
+				await UpdatePost(CurrentId, {
 					...postData,
 					email: currentUserEmail,
 				});
@@ -43,7 +43,7 @@ export const InputForm = () => {
 				console.log(error);
 			}
 		} else {
-			const result = await createPost({ ...postData, email: currentUserEmail });
+			await createPost({ ...postData, email: currentUserEmail });
 			setCounter(!counter);
 		}
 		clear();
@@ -65,6 +65,28 @@ export const InputForm = () => {
 			setPostData(currentPost);
 		}
 	}, [CurrentId]);
+	const navigate = useNavigate();
+
+	if (!currentUser) {
+		return (
+			<Card style={{ width: "18rem" }}>
+				<Card.Body>
+					<Card.Title>You are logged out</Card.Title>
+					<Card.Text>
+						Please log in to Create/Edit/Delete or Like Posts
+					</Card.Text>
+					<Button
+						variant="primary"
+						onClick={() => {
+							navigate("/auth");
+						}}
+					>
+						Log In
+					</Button>
+				</Card.Body>
+			</Card>
+		);
+	}
 
 	return (
 		<Card style={{ padding: "10px" }}>
