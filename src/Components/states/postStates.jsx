@@ -5,7 +5,7 @@ import { PostUpdateCounter } from "./PostUpdateCounter";
 export const PostState = createContext();
 
 export const PostStatesProvider = (props) => {
-	const [post, setPost] = useState([]);
+	const [post, setPost] = useState(null);
 	const [counter] = useContext(PostUpdateCounter);
 
 	useEffect(async () => {

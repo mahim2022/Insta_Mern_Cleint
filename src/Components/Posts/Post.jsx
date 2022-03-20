@@ -9,6 +9,7 @@ import { CurrentUserState } from "../states/CurrentUser";
 import { AiOutlineLike } from "react-icons/ai";
 import { AiFillLike } from "react-icons/ai";
 import { RiDeleteBin6Fill } from "react-icons/ri";
+import ClipLoader from "react-spinners/ClipLoader";
 
 export const Post = () => {
 	const [post] = useContext(PostState);
@@ -63,74 +64,84 @@ export const Post = () => {
 				</div>
 			);
 	};
-
-	return (
-		<div style={{}}>
-			<Container fluid>
-				<Row sm="auto">
-					{post.map((cur, index) => {
-						return (
-							<Col sm={"auto"} key={index}>
-								<Card
-									style={{
-										width: "fit-content",
-										margin: "5px",
-									}}
-								>
-									{currentUser ? (
-										<Button
-											className="edit"
-											onClick={() => updatePosts(cur._id)}
-											style={{
-												width: "fit-content",
-												backgroundColor: "transparent",
-												border: "none",
-											}}
-										>
-											⚙
-										</Button>
-									) : null}
-									<Card.Img
-										variant="top"
-										src={cur.selectedFile}
+	if (!post) {
+		return (
+			<div style={{ position: "relative", left: "20vw" }}>
+				<ClipLoader color="white"></ClipLoader>
+			</div>
+		);
+	} else {
+		return (
+			<div style={{}}>
+				<Container fluid>
+					<Row sm="auto">
+						{post.map((cur, index) => {
+							return (
+								<Col sm={"auto"} key={index}>
+									<Card
 										style={{
-											height: "180px",
-											width: "180px",
+											width: "fit-content",
+											margin: "5px",
 										}}
-									/>
-									<Card.Body>
-										<Card.Title style={{ marginTop: "-10px" }}>
-											{cur.title}
-										</Card.Title>
-										<Card.Text style={{ marginTop: "-10px" }}>
-											{cur.message}
-										</Card.Text>
-									</Card.Body>
-									{currentUser ? (
-										<div
-											className={`like_display_button`}
-											style={{ marginTop: "-15px" }}
-										>
-											<button
-												className="like"
-												onClick={() => likePost(cur._id, cur.likes)}
+									>
+										{currentUser ? (
+											<Button
+												className="edit"
+												onClick={() => updatePosts(cur._id)}
+												style={{
+													width: "fit-content",
+													backgroundColor: "transparent",
+													border: "none",
+												}}
 											>
-												<LikeRender likesArray={cur.likes}></LikeRender>
-											</button>
+												⚙
+											</Button>
+										) : null}
+										<Card.Img
+											variant="top"
+											src={cur.selectedFile}
+											style={{
+												height: "180px",
+												width: "180px",
+											}}
+										/>
+										<Card.Body>
+											<Card.Title style={{ marginTop: "-10px" }}>
+												{cur.title}
+											</Card.Title>
+											<Card.Text style={{ marginTop: "-10px" }}>
+												{cur.message}
+											</Card.Text>
+										</Card.Body>
+										{currentUser ? (
+											<div
+												className={`like_display_button`}
+												style={{ marginTop: "-15px" }}
+											>
+												<button
+													className="like"
+													onClick={() => likePost(cur._id, cur.likes)}
+												>
+													<LikeRender likesArray={cur.likes}></LikeRender>
+												</button>
 
-											<p className="delete" onClick={() => deletePost(cur._id)}>
-												<RiDeleteBin6Fill
-													style={{ color: "black" }}
-												></RiDeleteBin6Fill>
-											</p>
-										</div>
-									) : null}
-								</Card>
-							</Col>
-						);
-					})}
-				</Row>
-			</Container>
-		</div>
-	);
+												<p
+													className="delete"
+													onClick={() => deletePost(cur._id)}
+												>
+													<RiDeleteBin6Fill
+														style={{ color: "black" }}
+													></RiDeleteBin6Fill>
+												</p>
+											</div>
+										) : null}
+									</Card>
+								</Col>
+							);
+						})}
+					</Row>
+				</Container>
+			</div>
+		);
+	}
 };
